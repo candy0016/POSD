@@ -29,6 +29,8 @@ public:
 
   bool match(Atom *A);
   bool match(Number *N);
+  bool match(Atom A);
+  bool match(Number N);
 
   /*bool match( Atom atom ){
     bool ret = _assignable;
