@@ -36,3 +36,13 @@ bool Variable::match( Number *N ){
         else return false;
     }
   }
+
+
+
+bool Variable::match(Atom A){
+    this->match(&A);
+}
+
+bool Variable::match(Number N){
+    this->match(&N);
+}
