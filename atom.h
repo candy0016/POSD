@@ -13,11 +13,12 @@ public:
   Atom (string s):_symbol(s), _value(s) {}
   bool operator ==(Atom a) {return _symbol == a._symbol;}
   string _symbol, _value;
+  string symbol() { return _symbol; }
+  string value() { return _value; }
 
   bool match(Variable &V);
   bool match(Number &N);
-  string symbol() { return _symbol; }
-  string value() { return _value; }
+  bool match(Atom &A);
 
 private:
     bool assignFlag = false;
