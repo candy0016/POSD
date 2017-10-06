@@ -44,8 +44,8 @@ bool Number::match(Atom A){
 }
 
 bool Number::match(Variable V){
-    if(!assignFlag && V.get_assign()){
-        assignFlag = true;
+    if(!this->assignFlag && V.get_assign()){
+        this->assignFlag = true;
         V.setX(this->symbol());
         V.set_assign_false();
         return true;
