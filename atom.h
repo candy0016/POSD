@@ -10,9 +10,9 @@ class Number;
 
 class Atom {
 public:
-  Atom (string s):_symbol(s) {}
+  Atom (string s):_symbol(s), _value(s) {}
   bool operator ==(Atom a) {return _symbol == a._symbol;}
-  string _symbol;
+  string _symbol, _value;
 
   bool match(Variable *V);
   bool match(Number *N);
