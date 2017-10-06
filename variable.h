@@ -27,6 +27,7 @@ public:
 
   bool match(Atom &A);
   bool match(Number &N);
+  bool match(Variable &V);
 
 
 };
