@@ -22,6 +22,7 @@ public:
 private:
     Atom *ptr1, *ptr2;
     bool assignFlag = false;
+    string s1, s2;
 
 };
 
