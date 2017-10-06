@@ -16,6 +16,8 @@ public:
 
   bool match(Variable *V);
   bool match(Number *N);
+  bool match(Variable V);
+  bool match(Number N);
 
 private:
     Atom *ptr1, *ptr2;
