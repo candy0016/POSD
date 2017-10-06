@@ -16,8 +16,8 @@ private:
     bool assignFlag = false;
 
 public:
-    Number (int num):_value(std::to_string(num)), _symbol(""), sFlag(false), vFlag(true) {}
-    Number (string name):_symbol(name), _value(""), sFlag(true), vFlag(false) {}
+    Number (int num):_value(std::to_string(num)), _symbol(std::to_string(num)), sFlag(false), vFlag(true) {}
+    Number (string name):_symbol(name), _value(name), sFlag(true), vFlag(false) {}
     string symbol() { return _symbol; }
     string value() { return _value; }
 
