@@ -31,3 +31,8 @@ bool Variable::match( Number &N ){
     }
   }
 
+bool Variable::match(Variable &V){
+    if(this->value().compare(V.value()) == 0) return true;
+    else return false;
+
+}
