@@ -36,8 +36,8 @@ bool Atom::match(Number N){
 }
 
 bool Atom::match(Variable V){
-    if(!assignFlag && V.get_assign()){
-        assignFlag = true;
+    if(!this->assignFlag && V.get_assign()){
+        this->assignFlag = true;
         V.setX(this->_symbol);
         V.set_assign_false();
         return true;
