@@ -16,7 +16,7 @@ private:
   Number *Nptr = nullptr;
 
 public:
-  Variable(string *s):_symbol(s){}
+  Variable(string s):_symbol(s){}
   string const _symbol;
   string value(){ return _value; }
   string symbol(){ return _symbol; }
