@@ -36,12 +36,26 @@ bool Number::match(Number *N){
     else return false;
 }
 
+
+
+
 bool Number::match(Atom A){
     return false;
 }
 
 bool Number::match(Variable V){
-    this->match(&V);
+    if(!assignFlag && V.get_assign()){
+        assignFlag = true;
+        V.setX(this->symbol());
+        V.set_assign_false();
+        return true;
+    }
+    else{
+        s1 = this->symbol();
+        s2 = V.getX();
+        if(s1.compare(s2)==0) return true;
+        else return false;
+    }
 }
 
 bool Number::match(Number N){
