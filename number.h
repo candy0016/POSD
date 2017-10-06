@@ -24,6 +24,9 @@ public:
     bool match(Atom *A);
     bool match(Variable *V);
     bool match(Number *N);
+    bool match(Atom A);
+    bool match(Variable V);
+    bool match(Number N);
 
     /*bool match(int compareN){
         _com = std::to_string(compareN);
