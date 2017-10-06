@@ -26,3 +26,9 @@ bool Atom::match(Variable &V){
     }
 
 }
+
+bool Atom::match(Atom &A){
+    if(this->value().compare(A.value()) == 0) return true;
+    else return false;
+
+}
