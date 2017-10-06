@@ -16,6 +16,8 @@ public:
 
   bool match(Variable &V);
   bool match(Number &N);
+  string symbol() { return _symbol; }
+  string value() { return _value; }
 
 private:
     bool assignFlag = false;
