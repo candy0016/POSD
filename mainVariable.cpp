@@ -40,9 +40,9 @@ bool Variable::match( Number *N ){
 
 
 bool Variable::match(Atom A){
-    if(_assignable){
-      _value = A._symbol ;
-      _assignable = false;
+    if(this->_assignable){
+      this->_value = A._symbol ;
+      this->_assignable = false;
       this->setX(_value);
       return true;
     }
@@ -53,9 +53,9 @@ bool Variable::match(Atom A){
 }
 
 bool Variable::match(Number N){
-    if(_assignable){
-      _value = N.value() ;
-      _assignable = false;
+    if(this->_assignable){
+      this->_value = N.value() ;
+      this->_assignable = false;
       this->setX(_value);
       return true;
     }
