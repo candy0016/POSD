@@ -10,7 +10,7 @@ class Number;
 
 class Variable{
 private:
-  string _value;
+  string _value, _assign;
   bool _assignable = true;
   Atom *Aptr = nullptr;
   Number *Nptr = nullptr;
@@ -26,6 +26,10 @@ public:
   Number *getNptr() { return this->Nptr; }
   void set_assign_false() { this->_assignable = false; }
   bool get_assign() { return this->_assignable; }
+  void setX(string s) { this->_assign = s; }
+  string getX() { return this->_assign; }
+
+
 
   bool match(Atom *A);
   bool match(Number *N);
