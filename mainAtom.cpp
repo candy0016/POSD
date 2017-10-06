@@ -13,7 +13,7 @@ bool Atom::match(Number &N){
 
 
 bool Atom::match(Variable &V){
-    if(!assignFlag && V.get_assign()){
+    if(V.get_assign()){
         assignFlag = true;
         V.set_assign_false();
         return true;
