@@ -31,4 +31,10 @@ bool Atom::match(Variable *V){
 }
 
 
+bool Atom::match(Number N){
+    return false;
+}
 
+bool Atom::match(Variable V){
+    this->match(&V);
+}
