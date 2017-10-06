@@ -35,3 +35,16 @@ bool Number::match(Number *N){
     }
     else return false;
 }
+
+bool Number::match(Atom A){
+    return false;
+}
+
+bool Number::match(Variable V){
+    this->match(&V);
+}
+
+bool Number::match(Number N){
+    this->match(&N);
+}
+
