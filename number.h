@@ -14,6 +14,7 @@ private:
     bool sFlag, vFlag;
     Number *ptr1, *ptr2;
     bool assignFlag = false;
+    string s1, s2;
 
 public:
     Number (int num):_value(std::to_string(num)), _symbol(std::to_string(num)), sFlag(false), vFlag(true) {}
