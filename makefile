@@ -2,7 +2,11 @@
 all: hw3
 
 hw3: mainStructure.o
+ifeq (${OS}, Windows_NT)
+	g++ -o hw3 mainStructure.o -lgtest
+else
 	g++ -o hw3 mainStructure.o -lgtest -lpthread
+endif
 
 mainStructure.o: mainStructure.cpp atom.h number.h struct.h variable.h utStruct.h utVariable.h
 	g++ -std=gnu++0x -c mainStructure.cpp
