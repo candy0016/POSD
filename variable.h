@@ -84,6 +84,11 @@ public:
                         term.getTemp()->push_back(tVec[k]);
                     }
                 }
+                for(int l=0; l<term.getTemp()->size(); l++){
+                    if((*term.getTemp())[l] != this){
+                        tVec.push_back( (*term.getTemp())[l] );
+                    }
+                }
                 return true;
             }
             else return false;
