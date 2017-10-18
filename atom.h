@@ -13,9 +13,7 @@ public:
     virtual string symbol() const = 0;
     virtual string value() = 0;
 
-    virtual bool match(Term & term) {
-      return symbol() == term.symbol();
-    }
+    virtual bool match(Term & term) = 0;
     virtual int getTerm() = 0;
     virtual bool get_assign() = 0;
     virtual void setValue(string s) = 0;
@@ -39,6 +37,22 @@ public:
   string value() {
     return _value;
   }
+
+  bool match(Term & term) {
+      if(term.getTerm()==1 || term.getTerm()==2) { return symbol() == term.symbol(); }
+      else if(term.getTerm()==3){
+        if(term.get_assign()){
+            term.setValue(value());
+            return true;
+        }
+        else{
+            return value() == term.value();
+        }
+      }
+      else if(term.getTerm()==4){ return false; }
+      else return false;
+    }
+
   int getTerm() { return 1; }
   bool get_assign() { return _assignable; }
   void setValue(string s) { this->_symbol = s; }
