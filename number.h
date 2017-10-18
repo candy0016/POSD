@@ -31,13 +31,14 @@ public:
     bool match(Term & term) {
       if(term.getTerm()==1 || term.getTerm()==2) { return symbol() == term.symbol(); }
       else if(term.getTerm()==3){
-        if(term.get_assign()){
+        term.match(*this);
+        /*if(term.get_assign()){
             term.setValue(value());
             return true;
         }
         else{
             return value() == term.value();
-        }
+        }*/
       }
       else if(term.getTerm()==4){ return false; }
       else return false;
