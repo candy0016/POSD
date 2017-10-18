@@ -57,6 +57,10 @@ public:
         else if(term.getTerm()==3){
             if((this->value().compare(term.value()) == 0) && !term.get_assign() && !this->get_assign() ) return true;
             else if(   ((!term.get_assign()) && this->get_assign()) || ((term.get_assign()) && !this->get_assign()) || ((term.get_assign()) && this->get_assign())){
+                if( term.get_assign() && this->get_assign() ){
+                    this->setValue(term.value());
+                }
+
                 if(!term.get_assign()){
                     this->setValue(term.value());
                     for(int a=0; a<tVec.size(); a++){
