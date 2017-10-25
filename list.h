@@ -103,6 +103,7 @@ bool List::match(Term & term){
     }
     else if(term.getTerm()==3){
         if(term.value().compare(this->value()) ==0) { return true; }
+        else if(term.get_assign()) { return true; }
         else { return false; }
     }
 
