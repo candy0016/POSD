@@ -106,7 +106,14 @@ bool List::match(Term & term){
         else if(term.get_assign()) { return true; }
         else { return false; }
     }
-
+    else if(term.getTerm()==1 || term.getTerm()==2){
+        bool flag=false;
+        for(int i=0; i<_elements.size(); i++){
+            if(term.value().compare(_elements[i]->value()) ==0) { flag=true; }
+        }
+        if(flag) return true;
+        else return false;
+    }
 
 }
 
