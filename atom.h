@@ -51,6 +51,7 @@ public:
         }*/
       }
       else if(term.getTerm()==4){ return false; }
+      else if(term.getTerm()==5){ return false; }
       else return false;
     }
 
