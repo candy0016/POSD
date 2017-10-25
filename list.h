@@ -101,6 +101,10 @@ bool List::match(Term & term){
         }
         else return false;
     }
+    else if(term.getTerm()==3){
+        if(term.value().compare(this->value()) ==0) { return true; }
+        else { return false; }
+    }
 
 
 }
