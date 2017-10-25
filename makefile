@@ -1,15 +1,15 @@
 
-all: hw3
+all: hw4
 
-hw3: mainStructure.o
+hw4: mainStructure.o
 ifeq (${OS}, Windows_NT)
-	g++ -o hw3 mainStructure.o -lgtest
+	g++ -o hw4 mainStructure.o -lgtest
 else
-	g++ -o hw3 mainStructure.o -lgtest -lpthread
+	g++ -o hw4 mainStructure.o -lgtest -lpthread
 endif
 
-mainStructure.o: mainStructure.cpp atom.h number.h struct.h variable.h utStruct.h utVariable.h
-	g++ -std=gnu++0x -c mainStructure.cpp
+mainStructure.o: mainStructure.cpp atom.h number.h struct.h variable.h utList.h list.h scanner.h
+		g++ -std=gnu++0x -c mainStructure.cpp
 
 
 
@@ -38,6 +38,6 @@ mainStructure.o: mainStructure.cpp atom.h number.h struct.h variable.h utStruct.
 #	g++ -std=c++11 -c list.cpp
 
 clean:
-	rm -f *.o hw3
+	rm -f *.o hw4
 stat:
 	wc *.h *.cpp
