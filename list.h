@@ -69,7 +69,18 @@ string List::value(){
 
 bool List::match(Term & term){
     if(term.getTerm()==5){
-        if(this->get_args()->size()!=0 && term.get_args()->size()!=0){
+        List * ps = dynamic_cast<List *>(&term);
+        if (ps){
+            if(_elements.size()!= ps->_elements.size())
+                return false;
+            for(int i=0;i<_elements.size();i++){
+                if(! _elements[i]->match(*(ps->_elements[i])))
+                    return false;
+            }
+            return true;
+        }
+        return false;
+        /*if(this->get_args()->size()!=0 && term.get_args()->size()!=0){
             if(this->get_args()->size() == term.get_args()->size()){
                 for(int i=0; i<this->get_args()->size(); i++){
                     if((*this->get_args())[i]->getTerm()==1 || (*this->get_args())[i]->getTerm()==2){
@@ -99,21 +110,14 @@ bool List::match(Term & term){
             }
             else return false;
         }
-        else return false;
+        else return false;*/
     }
     else if(term.getTerm()==3){
         if(term.value().compare(this->value()) ==0) { return true; }
         else if(term.get_assign()) { return true; }
         else { return false; }
     }
-    else if(term.getTerm()==1 || term.getTerm()==2){
-        bool flag=false;
-        for(int i=0; i<_elements.size(); i++){
-            if(term.value().compare(_elements[i]->value()) ==0) { flag=true; }
-        }
-        if(flag) return true;
-        else return false;
-    }
+    else return false;
 
 
 }
