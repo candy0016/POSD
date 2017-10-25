@@ -91,7 +91,7 @@ TEST(List, matchToStructShouldFail) {
     ASSERT_FALSE(S.match(l));
 }
 
-// ?- Y = [496, X, terence_tao].
+// ?- Y = [496, X, terence_tao].------------------------
 // Y = [496, X, terence_tao].
 TEST(List, matchToVarShouldSucceed) {
     Number N(496);
@@ -116,7 +116,7 @@ TEST(List, matchToVarOccuredInListShouldFail) {
     ASSERT_FALSE(X.match(l));
 }
 
-// ?- [496, X, terence_tao] = [496, X, terence_tao].--------------------
+// ?- [496, X, terence_tao] = [496, X, terence_tao].
 // true.
 TEST(List, matchToSameListShouldSucceed) {
     Number N(496);
@@ -143,7 +143,7 @@ TEST(List, matchToSameListWithDiffVarNameShouldSucceed) {
     ASSERT_TRUE(l2.match(l));
 }
 
-// ?- [496, X, terence_tao] = [496, 8128, terence_tao].
+// ?- [496, X, terence_tao] = [496, 8128, terence_tao].--------------------
 // X = 8128.
 TEST(List, matchToVarToAtominListShouldSucceed) {
     Number N(496);
@@ -177,7 +177,7 @@ TEST(List, matchVarinListToAtomShouldSucceed) {
     ASSERT_EQ("[496, alan_mathison_turing, terence_tao]", Y.value());
 }
 
-// Example:---------------------------------------------------------
+// Example:
 // ?- [first, second, third] = [H|T].
 // H = first, T = [second, third].
 TEST(List, headAndTailMatching1) {
@@ -229,10 +229,9 @@ TEST(List, headAndTailMatching4) {
 // When client still want to get the head of list
 // Then it should throw a string: "Accessing head in an empty list" as an exception.
 TEST (List, emptyExecptionOfHead) {
-    vector<Term *> args;
-    List l(args);
-
     try{
+        vector<Term *> args;
+        List l(args);
         l.head();
     }
     catch(exception &ex){
@@ -244,10 +243,9 @@ TEST (List, emptyExecptionOfHead) {
 // When client still want to get the head of list
 // Then it should throw a string: "Accessing tail in an empty list" as an exception.
 TEST (List, emptyExecptionOfTail) {
-    vector<Term *> args;
-    List l(args);
-
     try{
+        vector<Term *> args;
+        List l(args);
         l.tail();
     }
     catch(exception &ex){
