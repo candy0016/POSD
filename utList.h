@@ -234,8 +234,8 @@ TEST (List, emptyExecptionOfHead) {
         List l(args);
         l.head();
     }
-    catch(exception &ex){
-        EXPECT_STREQ("Accessing head in an empty list", ex.what());
+    catch(string ex){
+        EXPECT_EQ("Accessing head in an empty list", ex);
     }
 }
 
@@ -248,8 +248,8 @@ TEST (List, emptyExecptionOfTail) {
         List l(args);
         l.tail();
     }
-    catch(exception &ex){
-        EXPECT_STREQ("Accessing tail in an empty list", ex.what());
+    catch(string ex){
+        EXPECT_EQ("Accessing tail in an empty list", ex);
     }
 }
 
