@@ -21,6 +21,10 @@ public:
             _value = ptr->value();
             return _value;
       }
+      else if(lptr!=nullptr){
+            _value = lptr->value();
+            return _value;
+      }
       else return _value;
 }
   string symbol() const{
@@ -97,7 +101,16 @@ public:
             ptr = &term;
             return true;
         }
-
+        else if(term.getTerm()==5){
+            if(this->get_assign()) {
+                for(int i=0; i<term.get_args()->size(); i++){
+                    if(this == (*term.get_args())[i]) return false;
+                }
+                lptr = &term;
+                return true;
+            }
+            else return false;
+        }
 
         else return false;
 
@@ -107,7 +120,7 @@ public:
 private:
   string _value;
   bool _assignable = true;
-  Term *temp, *ptr = nullptr;
+  Term *temp, *ptr = nullptr, *lptr = nullptr;
     vector<Term *> tVec;  //X is same with which variable
 };
 
