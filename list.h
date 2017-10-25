@@ -115,8 +115,9 @@ bool List::match(Term & term){
         else return false;
     }
 
-}
 
+}
+/*
 class myexpception1: public exception{
     virtual const char* what() const throw()
     {
@@ -129,18 +130,18 @@ class myexpception2: public exception{
     {
         return "Accessing tail in an empty list";
     }
-}myex2;
+}myex2;*/
 
 Term * List::head() const{
     if(_elements.size()==0){
-        throw myex1;
+        throw string("Accessing head in an empty list");
     }
     return this->_elements[0];
 }
 
 List * List::tail() const{
     if(_elements.size()==0){
-        throw myex2;
+        throw string("Accessing tail in an empty list");
     }
     vector<Term *> args;
     if(_elements.size()>1){
