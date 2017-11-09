@@ -20,19 +20,28 @@ public:
       else if (isdigit(currentChar())) {
         _tokenValue = extractNumber();
         return NUMBER;
-      }  else if (islower(currentChar())) {
+      }
+      else if (islower(currentChar())) {
         string s = extractAtom();
         processToken<ATOM>(s);
         return ATOM;
-      } else if (isSpecialCh(currentChar())) {
+      }
+      else if (isSpecialCh(currentChar())) {
         string s = extractAtomSC();
         processToken<ATOMSC>(s);
         return ATOMSC;
-      } else if (isupper(currentChar()) || currentChar() == '_') {
+      }
+      else if (isupper(currentChar()) || currentChar() == '_') {
         string s = extractVar();
         processToken<VAR>(s);
         return VAR;
-      } else {
+      }
+      /*else if (isListCh(currentChar())){
+        //string s = extractList();
+        //processToken<LIST>(s);
+        return LIST;
+      }*/
+      else {
         _tokenValue = NONE;
         return extractChar();
       }
@@ -75,7 +84,13 @@ public:
     for (;isalnum(buffer[pos]) || buffer[pos] == '_'; ++pos);
     return buffer.substr(posBegin, pos-posBegin);
   }
-
+/*
+  string extractList() {
+    int posBegin = position();
+    for (;isListCh(buffer[pos]); ++pos);
+    return buffer.substr(posBegin, pos-posBegin);
+  }
+*/
   char extractChar() {
     return buffer[pos++];
   }
@@ -101,3 +116,4 @@ private:
 
 
 #endif
+
