@@ -36,6 +36,7 @@ public:
   void setTemp(Term *t) { this->temp = t; }
   vector<Term *> *getTemp() { return &tVec; }
   vector<Term *> *get_args() {}
+  string arity(){}
 
 
   bool match( Term & term ){
