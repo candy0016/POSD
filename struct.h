@@ -21,12 +21,16 @@ public:
     return _name;
   }
   string symbol() const{
-    string ret =_name.symbol() + "(";
-    for(int i = 0; i < _args.size() - 1 ; i++){
-      ret += _args[i]-> symbol() + ", ";
-    }
-    ret += _args[_args.size()-1]-> symbol() + ")";
-    return  ret;
+    if(_args.size()==0) { return _name.symbol()+"()"; }
+    else{
+        string ret =_name.symbol() + "(";
+        for(int i = 0; i < _args.size() - 1 ; i++){
+        ret += _args[i]-> symbol() + ", ";
+        }
+        ret += _args[_args.size()-1]-> symbol() + ")";
+        return  ret;
+        }
+
   }
 
   string value() {
@@ -43,15 +47,15 @@ public:
     else{
         Struct * ps = dynamic_cast<Struct *>(&term);
         if (ps){
-        if (!_name.match(ps->_name))
-            return false;
-        if(_args.size()!= ps->_args.size())
-            return false;
-        for(int i=0;i<_args.size();i++){
-            if(_args[i]->symbol() != ps->_args[i]->symbol())
+            if (!_name.match(ps->_name))
                 return false;
-        }
-        return true;
+            if(_args.size()!= ps->_args.size())
+                return false;
+            for(int i=0;i<_args.size();i++){
+                if(_args[i]->symbol() != ps->_args[i]->symbol())
+                    return false;
+            }
+            return true;
         }
         return false;
     }
@@ -65,6 +69,7 @@ public:
   void setTemp(Term *t) {}
   vector<Term *> *getTemp() {}
   vector<Term *> *get_args() { return &_args; }
+  string arity(){ return to_string(this->_args.size()); }
 
 
 
