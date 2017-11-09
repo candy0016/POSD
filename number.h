@@ -51,6 +51,7 @@ public:
     void setTemp(Term *t) {}
     vector<Term *> *getTemp() {}
     vector<Term *> *get_args() {}
+    string arity(){}
 };
 
 #endif
