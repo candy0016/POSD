@@ -28,6 +28,7 @@ public:
   void setTemp(Term *t) {}
   vector<Term *> *getTemp() {}
   vector<Term *> *get_args() { return &_elements; }
+  string arity(){}
 
 private:
   vector<Term *> _elements;
@@ -80,37 +81,7 @@ bool List::match(Term & term){
             return true;
         }
         return false;
-        /*if(this->get_args()->size()!=0 && term.get_args()->size()!=0){
-            if(this->get_args()->size() == term.get_args()->size()){
-                for(int i=0; i<this->get_args()->size(); i++){
-                    if((*this->get_args())[i]->getTerm()==1 || (*this->get_args())[i]->getTerm()==2){
-                        if((*term.get_args())[i]->getTerm()==1 || (*term.get_args())[i]->getTerm()==2) {
-                            if(((*this->get_args())[i]->value().compare((*term.get_args())[i]->value())) != 0) { return false; }
-                        }
-                        else if((*term.get_args())[i]->getTerm()==3){
-                            if((*term.get_args())[i]->get_assign()) { (*term.get_args())[i]->setValue((*this->get_args())[i]->value()); }
-                            else{
-                                if( (*this->get_args())[i]->value().compare((*term.get_args())[i]->value()) != 0) { return false; }
-                            }
-                        }
-                    }
-                    else if((*this->get_args())[i]->getTerm()==3){
-                        if((*term.get_args())[i]->getTerm()==1 || (*term.get_args())[i]->getTerm()==2) {
-                            if((*term.get_args())[i]->get_assign()){
-                                (*this->get_args())[i]->setValue((*term.get_args())[i]->value());
-                            }
-                            else{
-                                if( (*this->get_args())[i]->value().compare((*term.get_args())[i]->value()) != 0) { return false; }
-                            }
-                        }
-                    }
 
-                }
-                return true;
-            }
-            else return false;
-        }
-        else return false;*/
     }
     else if(term.getTerm()==3){
         if(term.value().compare(this->value()) ==0) { return true; }
