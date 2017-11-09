@@ -20,6 +20,7 @@ public:
     virtual void setTemp(Term *t) = 0;
     virtual vector<Term *> *getTemp() = 0;
     virtual vector<Term *> *get_args() = 0;
+    virtual string arity() = 0;
 };
 
 class Atom : public Term{
@@ -61,6 +62,7 @@ public:
   void setTemp(Term *t) {}
   vector<Term *> *getTemp() {}
   vector<Term *> *get_args() {}
+  string arity(){}
 };
 
 
