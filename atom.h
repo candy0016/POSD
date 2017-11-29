@@ -16,11 +16,20 @@ public:
     virtual bool match(Term & term) = 0;
     virtual int getTerm() = 0;
     virtual bool get_assign() = 0;
+    virtual void set_assign() = 0;
     virtual void setValue(string s) = 0;
     virtual void setTemp(Term *t) = 0;
     virtual vector<Term *> *getTemp() = 0;
     virtual vector<Term *> *get_args() = 0;
-    virtual string arity() = 0;
+    virtual int arity() = 0;
+    virtual bool isContain(string symbol) { return false; }
+    virtual Term *findBySymbol(string symbol)
+    {
+      if (symbol == this->symbol())
+       return this;
+     else
+       return nullptr;
+    }
 };
 
 class Atom : public Term{
@@ -43,13 +52,6 @@ public:
       if(term.getTerm()==1 || term.getTerm()==2) { return symbol() == term.symbol(); }
       else if(term.getTerm()==3){
         term.match(*this);
-        /*if(term.get_assign()){
-            term.setValue(value());
-            return true;
-        }
-        else{
-            return value() == term.value();
-        }*/
       }
       else if(term.getTerm()==4){ return false; }
       else if(term.getTerm()==5){ return false; }
@@ -62,7 +64,8 @@ public:
   void setTemp(Term *t) {}
   vector<Term *> *getTemp() {}
   vector<Term *> *get_args() {}
-  string arity(){}
+  int arity(){}
+  void set_assign() {}
 };
 
 
