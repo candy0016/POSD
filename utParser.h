@@ -278,8 +278,8 @@ TEST_F(ParserTest, ThreeTermsMatching) {
   EXPECT_EQ("3", terms[4]->value());
 
 }
-/*
-TEST_F(ParserTest, TwoVariableMatching2) { //--------------------------------------------------------------
+/*******************FAILED
+TEST_F(ParserTest, TwoVariableMatching2) {
   Scanner scanner("X=1, X=Y.");
   Parser parser(scanner);
   parser.matchings();
@@ -385,8 +385,8 @@ TEST_F(ParserTest, TwoVariableMatching4) {
   EXPECT_EQ("Y", terms[2]->symbol());
   EXPECT_EQ("1", terms[2]->value());
 }
-/*
-TEST_F(ParserTest, ConjTwoMatchingFailure) {//--------------------------------------------------------------
+/************************************FAILED
+TEST_F(ParserTest, ConjTwoMatchingFailure) {
   Scanner scanner("X=1, X=2.");
   Parser parser(scanner);
   parser.matchings();
