@@ -21,14 +21,14 @@ public:
   Term * head() const;
   List * tail() const;
 
-
   int getTerm() { return 5; }
   bool get_assign() {}
   void setValue(string s) {}
   void setTemp(Term *t) {}
   vector<Term *> *getTemp() {}
   vector<Term *> *get_args() { return &_elements; }
-  string arity(){}
+  int arity(){}
+  void set_assign() {}
 
 private:
   vector<Term *> _elements;
@@ -92,20 +92,6 @@ bool List::match(Term & term){
 
 
 }
-/*
-class myexpception1: public exception{
-    virtual const char* what() const throw()
-    {
-        return "Accessing head in an empty list";
-    }
-}myex1;
-
-class myexpception2: public exception{
-    virtual const char* what() const throw()
-    {
-        return "Accessing tail in an empty list";
-    }
-}myex2;*/
 
 Term * List::head() const{
     if(_elements.size()==0){
