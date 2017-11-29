@@ -278,7 +278,7 @@ TEST_F(ParserTest, ThreeTermsMatching) {
   EXPECT_EQ("3", terms[4]->value());
 
 }
-/*******************FAILED
+//*******************************************************FAILED
 TEST_F(ParserTest, TwoVariableMatching2) {
   Scanner scanner("X=1, X=Y.");
   Parser parser(scanner);
@@ -302,7 +302,7 @@ TEST_F(ParserTest, TwoVariableMatching2) {
 
   EXPECT_EQ("1", terms[0]->value());
   EXPECT_EQ("1", terms[2]->value());
-}*/
+}
 
 TEST_F(ParserTest, TwoVariableMatching3) {
   Scanner scanner("X=Y, X=1.");
@@ -385,7 +385,7 @@ TEST_F(ParserTest, TwoVariableMatching4) {
   EXPECT_EQ("Y", terms[2]->symbol());
   EXPECT_EQ("1", terms[2]->value());
 }
-/************************************FAILED
+//***********************************************************FAILED
 TEST_F(ParserTest, ConjTwoMatchingFailure) {
   Scanner scanner("X=1, X=2.");
   Parser parser(scanner);
@@ -408,7 +408,7 @@ TEST_F(ParserTest, ConjTwoMatchingFailure) {
   EXPECT_EQ("2", et->right->right->term->symbol());
 
   EXPECT_FALSE(et->evaluate());
-}*/
+}
 
 TEST_F(ParserTest, DisjTwoMatchingSuccess) {
   Scanner scanner("X=1; X=2.");
@@ -449,38 +449,6 @@ TEST_F(ParserTest, MatchingSuccess) {
   EXPECT_EQ("2", terms[2]->value());
   EXPECT_EQ("s(s(2))", terms[4]->value());
 }
-/*
-// ?- X=1, X=Y.
-// Y=1
-TEST (Variable, varX_to_num1_and_varX_to_varY) {
-    Variable X("X");
-    Variable Y("Y");
-    Number E(1);
-    X.match(E);
-    X.match(Y);
-    ASSERT_EQ( "1", X.value());
-    ASSERT_EQ( "1", Y.value());
-}
 
-// ?- X=1, X=Y, Y=Z.
-// Y=1
-TEST (Variable, three_var_match) {
-    Variable X("X"), Y("Y"), Z("Z");
-    Number E(1);
-    X.match(E);
-    X.match(Y);
-    X.match(Z);
-    ASSERT_EQ( "1", Z.value());
-    ASSERT_EQ( "1", Y.value());
-}
-
-// ?- X=1, X=2.
-// false
-TEST (Variable, varX_to_num1_and_varX_to_num2) {
-    Variable X("X");
-    Number E1(1), E2(2);
-    X.match(E1);
-    ASSERT_FALSE(X.match(E2));
-}*/
 
 #endif
