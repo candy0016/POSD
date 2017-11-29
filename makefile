@@ -1,14 +1,14 @@
 
-all: hw5
+all: hw6
 
-hw5: mainStructure.o
+hw6: mainStructure.o
 ifeq (${OS}, Windows_NT)
-	g++ -o hw5 mainStructure.o -lgtest
+	g++ -o hw6 mainStructure.o -lgtest
 else
-	g++ -o hw5 mainStructure.o -lgtest -lpthread
+	g++ -o hw6 mainStructure.o -lgtest -lpthread
 endif
 
-mainStructure.o: mainStructure.cpp atom.h number.h struct.h variable.h list.h scanner.h parser.h utParser.h
+mainStructure.o: mainStructure.cpp atom.h number.h struct.h variable.h list.h scanner.h parser.h utParser.h node.h
 		g++ -std=gnu++0x -c mainStructure.cpp
 
 
@@ -38,6 +38,6 @@ mainStructure.o: mainStructure.cpp atom.h number.h struct.h variable.h list.h sc
 #	g++ -std=c++11 -c list.cpp
 
 clean:
-	rm -f *.o hw5
+	rm -f *.o hw6
 stat:
 	wc *.h *.cpp
