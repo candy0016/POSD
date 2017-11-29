@@ -32,13 +32,6 @@ public:
       if(term.getTerm()==1 || term.getTerm()==2) { return symbol() == term.symbol(); }
       else if(term.getTerm()==3){
         term.match(*this);
-        /*if(term.get_assign()){
-            term.setValue(value());
-            return true;
-        }
-        else{
-            return value() == term.value();
-        }*/
       }
       else if(term.getTerm()==4){ return false; }
       else if(term.getTerm()==5){ return false; }
@@ -51,7 +44,8 @@ public:
     void setTemp(Term *t) {}
     vector<Term *> *getTemp() {}
     vector<Term *> *get_args() {}
-    string arity(){}
+    int arity(){}
+    void set_assign() {}
 };
 
 #endif
