@@ -31,12 +31,13 @@ public:
     return _symbol;
   }
   bool get_assign() { return this->_assignable; }
+  void set_assign() { this->_assignable = false; }
   int getTerm() { return 3; }
   void setValue(string s) { this->_value = s; }
   void setTemp(Term *t) { this->temp = t; }
   vector<Term *> *getTemp() { return &tVec; }
   vector<Term *> *get_args() {}
-  string arity(){}
+  int arity(){}
 
 
   bool match( Term & term ){
@@ -61,11 +62,21 @@ public:
         }
         else if(term.getTerm()==3){
             if((this->value().compare(term.value()) == 0) && !term.get_assign() && !this->get_assign() ) return true;
-            else if(   ((!term.get_assign()) && this->get_assign()) || ((term.get_assign()) && !this->get_assign()) || ((term.get_assign()) && this->get_assign())){
+            else if( ((!term.get_assign()) && this->get_assign()) || ((term.get_assign()) && !this->get_assign()) || ((term.get_assign()) && this->get_assign())){
                 if( term.get_assign() && this->get_assign() ){
                     this->setValue(term.value());
+                    
                 }
+                else if( term.get_assign() && !this->get_assign() ){
+                    term.setValue(this->value());
+                    term.set_assign();
 
+                    if(!term.getTemp()->empty()){
+                    for(int i=0; i<term.getTemp()->size(); i++){
+                        (*term.getTemp())[i]->setValue(this->value());
+                    }
+                }
+                }
                 if(!term.get_assign()){
                     this->setValue(term.value());
                     for(int a=0; a<tVec.size(); a++){
@@ -116,12 +127,33 @@ public:
         else return false;
 
   }
+/*
+  bool match(Term &term){
+    if(this == &term) return true;
+    else if(_value2 == NULL){
+        _value2 = &term;
+        return true;
+    }
+    else{
+        Variable *tempVar = dynamic_cast<Variable*>(&term);
+        if(tempVar != nullptr){
+            if(tempVar->get_assign()){
+                tempVar->setValue(_value);
+                return true;
+            }
+            else _value2->match(*tempVar);
+        }
+        return _value2->match(term);
+    }
+ }
+
+*/
 
 
 private:
   string _value;
   bool _assignable = true;
-  Term *temp, *ptr = nullptr, *lptr = nullptr;
+  Term *temp, *ptr = nullptr, *lptr = nullptr, *_value2;
     vector<Term *> tVec;  //X is same with which variable
 };
 
