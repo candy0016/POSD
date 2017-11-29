@@ -62,6 +62,25 @@ public:
 
   }
 
+  bool isContain(string symbol)
+  {
+    for (int i = 0; i < _args.size(); i++)
+    {
+      if (symbol == _args[i]->symbol() || _args[i]->isContain(symbol))
+      {
+        return true;
+      }
+    }
+  }
+
+  Term *findBySymbol(string symbol)
+  {
+    for (int i = 0; i < _args.size(); i++)
+    {
+      if (_args[i]->findBySymbol(symbol) != nullptr)
+        return _args[i]->findBySymbol(symbol);
+    }
+  }
 
   int getTerm() { return 4; }
   bool get_assign() { return _assignable; }
@@ -69,7 +88,8 @@ public:
   void setTemp(Term *t) {}
   vector<Term *> *getTemp() {}
   vector<Term *> *get_args() { return &_args; }
-  string arity(){ return to_string(this->_args.size()); }
+  int arity(){ return this->_args.size(); }
+  void set_assign() {}
 
 
 
