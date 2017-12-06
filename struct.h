@@ -1,103 +1,54 @@
 #ifndef STRUCT_H
 #define STRUCT_H
 
+#include "atom.h"
 #include <vector>
 #include <string>
-//#include "variable.h"
 
-using namespace std;
+using std::string;
 
-class Struct:public Term
-{
+class Struct: public Term {
 public:
-  Struct(Atom const & name, std::vector<Term *> args):_name(name), _args(args) {
+  Struct(Atom name, std::vector<Term *> args): _name(name) {
+    _args = args;
   }
 
   Term * args(int index) {
     return _args[index];
   }
 
-  Atom const & name() {
+  Atom & name() {
     return _name;
   }
-  string symbol() const{
-    if(_args.size()==0) { return _name.symbol()+"()"; }
-    else{
-        string ret =_name.symbol() + "(";
-        for(int i = 0; i < _args.size() - 1 ; i++){
-        ret += _args[i]-> symbol() + ", ";
-        }
-        ret += _args[_args.size()-1]-> symbol() + ")";
-        return  ret;
-        }
-
+  string symbol() const {
+    if(_args.empty())
+    return  _name.symbol() + "()";
+    string ret = _name.symbol() + "(";
+    std::vector<Term *>::const_iterator it = _args.begin();
+    for (; it != _args.end()-1; ++it)
+      ret += (*it)->symbol()+", ";
+    ret  += (*it)->symbol()+")";
+    return ret;
   }
 
-  string value() {
-        string ret =_name.symbol() + "(";
-    for(int i = 0; i < _args.size() - 1 ; i++){
-      ret += _args[i]-> value() + ", ";
-    }
-    ret += _args[_args.size()-1]-> value() + ")";
-    return  ret;
-    }
-
-  bool match(Term &term){
-    if(term.getTerm()==5){ return false; }
-    else{
-        Struct * ps = dynamic_cast<Struct *>(&term);
-        if (ps){
-            if (!_name.match(ps->_name))
-                return false;
-            if(_args.size()!= ps->_args.size())
-                return false;
-            for(int i=0;i<_args.size();i++){
-                if(_args[i]->symbol() != ps->_args[i]->symbol())
-                    return false;
-            }
-            return true;
-        }
-        return false;
-    }
-
+  string value() const {
+    string ret = _name.symbol() + "(";
+    std::vector<Term *>::const_iterator it = _args.begin();
+    for (; it != _args.end()-1; ++it)
+      ret += (*it)->value()+", ";
+    ret  += (*it)->value()+")";
+    return ret;
   }
-
-  bool isContain(string symbol)
-  {
-    for (int i = 0; i < _args.size(); i++)
-    {
-      if (symbol == _args[i]->symbol() || _args[i]->isContain(symbol))
-      {
-        return true;
-      }
-    }
-  }
-
-  Term *findBySymbol(string symbol)
-  {
-    for (int i = 0; i < _args.size(); i++)
-    {
-      if (_args[i]->findBySymbol(symbol) != nullptr)
-        return _args[i]->findBySymbol(symbol);
-    }
-  }
-
-  int getTerm() { return 4; }
-  bool get_assign() { return _assignable; }
-  void setValue(string s) {}
-  void setTemp(Term *t) {}
-  vector<Term *> *getTemp() {}
-  vector<Term *> *get_args() { return &_args; }
-  int arity(){ return this->_args.size(); }
-  void set_assign() {}
-
-
-
+  int arity() const {return _args.size();}
+  //here use Iterator as a class
+  //but it is a template
+  //so it failed
+  Iterator<Term > * createIterator();
+  Iterator<Term > * createDFSIterator();
+  Iterator<Term > * createBFSIterator();
 private:
   Atom _name;
-  vector<Term *> _args;
-  bool _assignable = false;
-
+  std::vector<Term *> _args;
 };
 
 #endif
