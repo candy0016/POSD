@@ -1,28 +1,46 @@
+all: hw7
 
-all: hw6
-
-hw6: mainStructure.o
-ifeq (${OS}, Windows_NT)
-	g++ -o hw6 mainStructure.o -lgtest
-else
-	g++ -o hw6 mainStructure.o -lgtest -lpthread
-endif
-
-mainStructure.o: mainStructure.cpp atom.h number.h struct.h variable.h list.h scanner.h parser.h utParser.h node.h
-		g++ -std=gnu++0x -c mainStructure.cpp
+hw7: mainIterator.o atom.o list.o struct.o iterator.h utIterator.h
+	g++ -o hw7 mainIterator.o atom.o list.o struct.o -lgtest -lpthread
 
 
+madRace: mainMadRace.o
+	g++ -o madRace mainMadRace.o -lgtest -lpthread
+mainMadRace.o: mainMadRace.cpp madRace.h utMadRace.h
+	g++ -std=c++11 -c mainMadRace.cpp
 
+utAtom: mainAtom.o atom.o struct.o
+	g++ -o utAtom mainAtom.o atom.o struct.o -lgtest -lpthread
+mainAtom.o: mainAtom.cpp utAtom.h atom.h utStruct.h struct.h
+	g++ -std=c++11 -c mainAtom.cpp
 
+atom.o: atom.cpp atom.h variable.h
+	g++ -std=c++11 -c atom.cpp
+
+utVariable: mainVariable.o atom.o struct.o
+		g++ -o utVariable mainVariable.o atom.o struct.o -lgtest -lpthread
+mainVariable.o: mainVariable.cpp utVariable.h variable.h
+		g++ -std=c++11 -c mainVariable.cpp
+list.o:list.cpp list.h
+		g++ -std=c++11 -c list.cpp
+struct.o:struct.cpp struct.h
+		g++ -std=c++11 -c struct.cpp
 #exp: mainExp.o
 #	g++ -o exp mainExp.o -lgtest -lpthread
 #mainExp.o: mainExp.cpp exp.h global.h
 #	g++ -std=c++11 -c mainExp.cpp
 
-#utScannerParser: mainScannerParser.o term.o struct.o var.o list.o
-#	g++ -o utScannerParser mainScannerParser.o term.o var.o struct.o list.o -lgtest -lpthread
-#mainScannerParser.o: mainScannerParser.cpp utScanner.h utParser.h scanner.h parser.h term.h var.h struct.h list.h global.h node.h
-#		g++ -std=c++11 -c mainScannerParser.cpp
+utScanner: mainScanner.o atom.o list.o struct.o scanner.h utScanner.h utParser.h parser.h
+	g++ -o utScanner mainScanner.o atom.o list.o struct.o -lgtest -lpthread
+mainScanner.o: mainScanner.cpp utScanner.h scanner.h  atom.h struct.h variable.h  utParser.h parser.h
+		g++ -std=c++11 -c mainScanner.cpp
+utIterator: mainIterator.o atom.o list.o struct.o iterator.h utIterator.h
+	g++ -o utIterator mainIterator.o atom.o list.o struct.o -lgtest -lpthread
+
+
+mainIterator.o: mainIterator.cpp utIterator.h
+	g++ -std=c++11 -c mainIterator.cpp
+
 
 #utTerm: mainTerm.o term.o struct.o var.o list.o
 #	g++ -o utTerm mainTerm.o term.o var.o struct.o list.o -lgtest -lpthread
@@ -36,8 +54,7 @@ mainStructure.o: mainStructure.cpp atom.h number.h struct.h variable.h list.h sc
 #g++ -std=c++11 -c var.cpp
 #list.o: list.h list.cpp term.h var.h
 #	g++ -std=c++11 -c list.cpp
-
 clean:
-	rm -f *.o hw6
+	rm -f *.o madRace utAtom utVariable utScanner utIterator hw7
 stat:
 	wc *.h *.cpp
