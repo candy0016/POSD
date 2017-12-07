@@ -7,14 +7,14 @@
 #include "iterator.h"
 using std::vector;
 
-Iterator<Term> * List::createDFSIterator()
+Iterator<Term*> * List::createDFSIterator()
 {
-  return new DFSIterator<Term >(this);
+  return new DFSIterator<Term *>(this);
 }
 
-Iterator<Term> * List::createBFSIterator()
+Iterator<Term*> * List::createBFSIterator()
 {
-  return new BFSIterator<Term >(this);
+  return new BFSIterator<Term *>(this);
 }
 string List::symbol() const{
     string ret ;
