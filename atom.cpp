@@ -4,7 +4,7 @@
 #include <typeinfo>
 
 Iterator<Term *> * Term::createIterator(){
-  return new NullIterator<Term >(this);
+  return new NullIterator<Term *>(this);
 }
 
 bool Term::match(Term & a){
