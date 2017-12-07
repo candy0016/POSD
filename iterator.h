@@ -11,17 +11,17 @@ class Iterator {
 public:
   virtual void first() = 0;
   virtual void next() = 0;
-  virtual T* currentItem() const = 0;
+  virtual T currentItem() const = 0;
   virtual bool isDone() const = 0;
 };
 
 template <typename T>
 class NullIterator :public Iterator<T>{
 public:
-  NullIterator(T *n){}
+  NullIterator(T n){}
   void first(){}
   void next(){}
-  T * currentItem() const{
+  T  currentItem() const{
       return nullptr;
   }
   bool isDone() const{
@@ -38,7 +38,7 @@ public:
     _index = 0;
   }
 
-  T* currentItem() const {
+  T currentItem() const {
     return _s->args(_index);
   }
 
@@ -64,7 +64,7 @@ public:
     _index = 0;
   }
 
-  T* currentItem() const {
+  T currentItem() const {
     return _list->args(_index);
   }
 
@@ -83,7 +83,7 @@ private:
 template <typename T>
 class DFSIterator :public Iterator<T> {
 public:
-  DFSIterator(T *term): _index(0), _term(term) {}
+  DFSIterator(T term): _index(0), _term(term) {}
 
   void first() {
     _index = 1;
@@ -92,7 +92,7 @@ public:
     
   }
 
-  T* currentItem() const {
+  T currentItem() const {
     return _terms[_index];
   }
 
@@ -104,7 +104,7 @@ public:
     _index++;
   }
 
-  void DFS(T * term) {
+  void DFS(T  term) {
     _terms.push_back(term);
     Struct *ps = dynamic_cast<Struct*>(term);
     List *pl = dynamic_cast<List*>(term);
@@ -121,14 +121,14 @@ public:
   }
 private:
   int _index;
-  T *_term;
-  std::vector<T *> _terms;
+  T _term;
+  std::vector<T > _terms;
 };
 
 template <typename T>
 class BFSIterator :public Iterator<T> {
 public:
-  BFSIterator(T *term): _index(0), _term(term) {}
+  BFSIterator(T term): _index(0), _term(term) {}
 
   void first() {
     _index = 1;
@@ -136,7 +136,7 @@ public:
     BFS(_term);
   }
 
-  T* currentItem() const {
+  T currentItem() const {
     return _terms[_index];
   }
 
@@ -148,11 +148,11 @@ public:
     _index++;
   }
 
-  void BFS(T * term) {
-    queue<T *> q;
+  void BFS(T  term) {
+    queue<T > q;
     q.push(_term);
     while(!q.empty()) {
-      T *n = q.front();
+      T n = q.front();
       q.pop();
       _terms.push_back(n);
       Struct *ps = dynamic_cast<Struct *>(n);
@@ -168,7 +168,7 @@ public:
   }
 private:
   int _index, tmp = 0;
-  T *_term;
-  std::vector<T *> _terms;
+  T _term;
+  std::vector<T > _terms;
 };
 #endif
