@@ -43,9 +43,9 @@ public:
   //here use Iterator as a class
   //but it is a template
   //so it failed
-  Iterator<Term > * createIterator();
-  Iterator<Term > * createDFSIterator();
-  Iterator<Term > * createBFSIterator();
+  Iterator<Term *> * createIterator();
+  Iterator<Term *> * createDFSIterator();
+  Iterator<Term *> * createBFSIterator();
 private:
   Atom _name;
   std::vector<Term *> _args;
