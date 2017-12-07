@@ -16,7 +16,7 @@ list.o:list.cpp list.h
 struct.o:struct.cpp struct.h
 		g++ -std=c++11 -c struct.cpp
 
-mainIterator.o atom.o list.o struct.o iterator.h utIterator.h mainIterator.cpp utIterator.h
+mainIterator.o: atom.o list.o struct.o iterator.h utIterator.h mainIterator.cpp utIterator.h
 	g++ -std=c++11 -c mainIterator.cpp
 
 #exp: mainExp.o
