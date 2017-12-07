@@ -5,7 +5,7 @@
 #include <sstream>
 #include <vector>
 
-
+/*
 using namespace std;
 
 class Number: public Term {
@@ -46,6 +46,6 @@ public:
     vector<Term *> *get_args() {}
     int arity(){}
     void set_assign() {}
-};
+};*/
 
 #endif
