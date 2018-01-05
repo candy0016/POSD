@@ -7,24 +7,40 @@ using std::string;
 
 class Variable : public Term {
 public:
-  Variable(string s):Term(s), _inst(0){}
-  string value() const {
-    if (_inst)
-      return _inst->value();
+  Variable(string s) : Term(s), _value(nullptr) {}
+  string value() const
+  {
+    if (!_value)
+      return symbol();
     else
-      return Term::value();
+      return _value->value();
   }
-  bool match( Term & term ){
-    if (this == &term)
+
+  bool isAssignable() { return !_value; }
+
+  bool match(Term &term)
+  {
+    if (term.findBySymbol(symbol()) != nullptr &&
+        term.findBySymbol(symbol()) != &term)
+      return false;
+    else if (&term == this)
       return true;
-    if(!_inst){
-      _inst = &term ;
+    else if (!_value)
+    {
+      _value = &term;
       return true;
     }
-    return _inst->match(term);
+    else
+    {
+      if (term.isAssignable())
+        return term.match(*this);
+      else
+        return _value->match(term);
+    }
   }
+
 private:
-  Term * _inst;
+  Term * _value;
 };
 
 #endif
