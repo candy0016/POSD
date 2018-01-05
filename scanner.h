@@ -36,11 +36,7 @@ public:
         processToken<VAR>(s);
         return VAR;
       }
-      /*else if (isListCh(currentChar())){
-        //string s = extractList();
-        //processToken<LIST>(s);
-        return LIST;
-      }*/
+      
       else {
         _tokenValue = NONE;
         return extractChar();
@@ -69,7 +65,7 @@ public:
 
   string extractAtom() {
     int posBegin = position();
-    for (;isalnum(buffer[pos]); ++pos);
+    for (;isalnum(buffer[pos]) || buffer[pos]=='_'; ++pos);
     return buffer.substr(posBegin, pos-posBegin);
   }
 
@@ -84,15 +80,13 @@ public:
     for (;isalnum(buffer[pos]) || buffer[pos] == '_'; ++pos);
     return buffer.substr(posBegin, pos-posBegin);
   }
-/*
-  string extractList() {
-    int posBegin = position();
-    for (;isListCh(buffer[pos]); ++pos);
-    return buffer.substr(posBegin, pos-posBegin);
-  }
-*/
+
   char extractChar() {
     return buffer[pos++];
+  }
+
+  string getBuffer(){
+    return buffer;
   }
 
 private:
